@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pod-read-bind
+  namespace: rbac
+subjects:
+  - kind: User
+    name: es
+    apiGroup: rbac.authorization.k8s.io
+  - kind: ServiceAccount
+    name: default
+    namespace: kube-system
+  - kind: Group
+    name: systeml:serviceaccounts:qa
+    apiGroup: rbac.authorization.k8s.io
+  - kind: Group
+    name: systeml:serviceaccounts
+  - kind: Group
+    name: system:authenticated
+    apiGroup: rbac.authorization.k8s.io
+  - kind: Group
+    name: system:unauthenticated
+    apiGroup: rbac.authorization.k8s.io
+  RoleRef:
+    - kind: Role
+      name: pod-read
+      apiGroup: rbac.authorization.k8s.io

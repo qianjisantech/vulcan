@@ -1,0 +1,30 @@
+# RC, Deployment 全自动调度， NodeSelector 定向调度 NodeAffinity 亲和性调度 In Notin Exists, DoesNotExist Gt Lt
+# DaemonSet：特定场景调度  Job批处理调度   Cronjob：定时任务  、PodAffinity：Pod亲和与互斥调度策略 Pod Priority Preemption：Pod优先级调度
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nodeSelectorrc
+  labels:
+    name: nodeSelectorrc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: nodeSelectorrc
+      labels:
+        name: nodeSelectorrc
+    spec:
+      containers:
+        - name: nodeselectorrc
+          image: nginx
+          imagePullPolicy: IfNotPresent
+          ports:
+            -containerPort: 80
+      nodeSelector: cnode-2
+  
+          
+          
+
+    
+

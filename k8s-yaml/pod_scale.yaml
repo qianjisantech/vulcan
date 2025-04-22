@@ -1,0 +1,15 @@
+#kubectl scale rc rc-name --replicas=副本数量
+# kubectl autoscale rc rc-name --min=1 --max=10 --cpu-percent=50
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoScaler
+metadata:
+  name: hpa-name
+spec:
+  scaleTargetRef:
+    apiVersion: v1
+    kind: ReplicationController
+    name: rc-name
+  minReplicas: 1
+  maxReplicas: 10
+  TargetCPUUtilizationPercentage: 50
+  

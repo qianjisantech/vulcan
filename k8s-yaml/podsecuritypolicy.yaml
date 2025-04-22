@@ -1,0 +1,17 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: psp-non-
+spec:
+  privileged: false # 不允许有特权模式
+  seLinux:
+    rule: RunaAsAny
+  supplementalGroup:
+    rule: RunAsAny
+  runAsUser:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+  volumes:
+    - '*'
+  

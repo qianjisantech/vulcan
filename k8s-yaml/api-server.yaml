@@ -1,0 +1,17 @@
+# https证书认证
+# http token 认证
+# http Base认证 base64(username+":"+password)--Header Authorization
+
+# -- authorization-mode
+#1. AlwaysDeny
+#2.AlwaysAllow
+#3.ABAC attributted based access control
+#4.webhook
+#5.RBAC Role-Based Access Control
+#6. Node
+# /etc/kubernetes/manifests/kube-apiserver.yaml
+
+Role
+ClsterRole
+RoleBinding
+ClusterRoleBinding

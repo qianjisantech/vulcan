@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersisentVolumeClaim
+metadata:
+  name: pvc
+  namespace: pv
+  labels:
+    name: pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    storage: 1Gi
+  selector:
+    matchLabels:
+      name: pv

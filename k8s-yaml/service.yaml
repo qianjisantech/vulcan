@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: string
+  labels:
+    name: string
+spec:
+  type: string
+  selector:
+    name: string
+  clusterIP: string
+  sessionAffinity: string
+  ports:
+    -name: string
+    protocol: string  #端口协议，支持TCP、UDP，默认是TCP
+    port: int  #宿主机端口
+    targetPort: int #目标Pod的端口
+    nodePort: int  #k8s内部端口
+  status:
+    loadBalancer:   # 负载均衡
+      ingress:
+        ip: string
+        hostname: string

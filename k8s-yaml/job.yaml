@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: process-item-$ITEM
+  labels:
+    jobgroup: jobexample
+spec:
+  template:
+    metadata:
+      name: jobexample
+    spec:
+      containers:
+        -name: c
+        image: busybox
+        imagePullPolicy: IfNotPersent
+        command: ["sh", "c", "echo $ITEM && sleep 5"]
+      restartPolicy: Never
+
+# 使用如下命令生成yaml文件
+for i in a b c; do cat job.yaml |sed "s/\&ITEM/${i}/" > ./  job-$i.yaml;done
+
+
+

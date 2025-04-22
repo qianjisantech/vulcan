@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: live-httpget
+spec:
+  containers:
+    - name: live-httpget
+      image: nginx
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        httpGet:
+          path: /_status/health
+          port: 80
+          host: host
+          scheme: Http
+          httpHeaders:
+            - name: string
+              value: string
+
+      initialDelaySeconds: 15
+      timeoutSeconds: 1
+

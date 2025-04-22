@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: live-tcp
+spec:
+  containers:
+    - name: live-tcp
+      image: nginx
+      imagePullPolicy: IfNotPresent
+      livenessProbe:
+        tcpSocket:
+          prot: 80
+      initialDelaySeconds: 15
+      timeoutSeconds: 1

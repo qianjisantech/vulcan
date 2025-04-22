@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: maweb-ingress
+  namespace: ingress
+spec:
+  rules:
+    - host: myweb.com
+      http:
+        paths:
+          - path: /api/usr/
+            backend:
+              serviceName: user-svc
+              servicePort: 8081
+          - path: /api/order
+            backend:
+              serviceName: order-svc
+              servicePort: 8082
+
+    - host: myweb2.com
+        http:
+          paths:
+            -backend:
+              serviceName: order-svc-2
+              servicePort: 8082
+              

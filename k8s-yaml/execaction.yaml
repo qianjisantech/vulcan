@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: live-exec
+spec:
+  containers:
+    - name: liver-exec
+      image: nginx
+      args:
+        - /bin/bash
+        - -c
+        - echo ok > tmp/heath;sleep 10; rm -rf /tmp/health;sleep 1000
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/health
+        initialDelaySeconds: 5
+        timeoutSeconds: 1

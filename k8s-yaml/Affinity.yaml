@@ -1,0 +1,11 @@
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringsSchedulingIngoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+              -key: name
+              operator: In
+              values: ["cnode-1", "cnode-2"]
+            

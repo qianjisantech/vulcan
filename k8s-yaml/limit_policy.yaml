@@ -1,0 +1,40 @@
+apiVersion: policy/v1beta1
+kind: PodSercurityPolicy
+metadata:
+  name: retricted
+  annoatations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default'
+    seccomp.security.alpha.kubernetes.io/defaultProfileNames: 'docker/default'
+    apprmor.security.beta.kubernetes.io/allowedProfileNames: 'runtime/default'
+    apprmor.security.beta.kubernetes.io/defaultProfileNames: 'runtime/default'
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    - ALL
+  volumes:
+    - 'configMap'     # pod的信息 传递给容器一种方式
+    - 'emptyDir'       # 临时的挂载目录
+    - 'projected'
+    - 'secret'        # pod的 secret
+    - 'downwardAPI'       # pod api
+    - 'persisentVolumeClaim'   # pvc
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'MustRunAsNonRoot'
+  supplementalGroups:
+    rule: 'MustRunAsRoot'
+    ranges:
+      - min: 1
+        max: 65535
+  fsGroup:
+    rule: 'MustRunAsRoot'
+    ranges:
+      - min: 1
+        max: 65535
+  ReadOnlyRootFilesSystem: false
+
+  
+  

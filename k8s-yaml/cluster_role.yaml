@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: secrets-clusterrole
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]    # 什么资源   ["pods","pods/log"] 资源上下级用/表示
+    resourceNames: ["my-configmap"]   # 资源的什么名字
+    nonResourceURLs: ["/healthz","/healthz/*"] # healthz及其所以子路径
+    verbs: ["get", "watch", "list"]
+    

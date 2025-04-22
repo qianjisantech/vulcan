@@ -1,0 +1,88 @@
+apiversion: v1
+kind: pod
+metadata:
+  name: nginx_test
+  labels:
+    app: nginx_test
+    name: pod-volume
+    age: zero
+  namespace: kube-system
+
+spec:
+  containers:
+    - name: nginx_test
+      image: nginx:latest
+      imagePullPolicy: IfNotPresent
+      imagePullSercets:
+        name: sercetKey   # 拉取镜像时使用的Secret名称
+
+      hostNetWork: true|false # 是否使用主机网络模式
+      restartPolicy: [Always|Never|OnFailure]    # 容器重启策略
+      ports:
+        - containersPort: 80
+      livenessprobe:
+        exec:
+          command: ["ls","aaa"]
+        initalDelaySeconds: 5
+        timeoutSeconds: 5
+  resources:
+    requests:
+      cpu: "125m"
+      memory: "32Mi"
+    limit:
+      cpu : "250m"
+      memory: "64Mi"
+  nodeSelector:
+    name: cncode-2
+  env:
+    - name: home
+      valueFrom:
+        configMapKeyRef:
+          name: config_map
+          key: home_path
+    - name: ns
+      valuefrom:
+        fieldRef:
+          fieldPath: metadata.namespace
+
+    - name: ip
+      valuefrom:
+        fieldRef:
+          fieldpath: status.podIp
+
+    _ name: req_cpu
+      valueFrom:
+        resourceFieldRef:
+          container: nginx_test
+          resource: requests.cpu
+            
+
+  volumes: #存储卷
+    - name: string
+      emptyDir: {} #表示与Pod同生命周期的一个临时目录
+      hostpath:
+        path: string
+      secret:   #挂载集群预定义的secret对象到容器内部
+        secretName: string
+        items:
+          - key: string
+            path: strng
+      configMap:   #挂载集群预定义的configMap对象到容器内部
+        name: config-map
+        items:
+          - key: home_path
+            path: hoepath.txt
+      - name: v-1
+        downwardAI:
+          items:
+            - path: "labels"
+              fieldRef:
+                fieldPath: metadata.labels
+
+
+# kubectl describe pods/nginx-test  查看容器的Event项 查看是否重启
+# kubectl label nodes/cnode-2 name=cnode-2 给节点打标签
+# kubectl get nodes 获取集群中的所有节点
+
+# systemctl status kubelet
+# 进入容器 echo{name} echo{ns}  ehco{ip}
