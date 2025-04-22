@@ -1,13 +1,13 @@
 .idea/
 
-luban_fe/dist
-luban_fe/node_modules
+front/dist
+front/node_modules
 
 # Log files
-luban_fe/npm-debug.log*
-luban_fe/yarn-debug.log*
-luban_fe/yarn-error.log*
-luban_fe/pnpm-debug.log*
+front/npm-debug.log*
+front/yarn-debug.log*
+front/yarn-error.log*
+front/pnpm-debug.log*
 
 logs/*.log
 *.log

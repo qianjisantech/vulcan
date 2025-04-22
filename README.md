@@ -46,7 +46,7 @@ GOOS=windows GOARCH=amd64 go build main.go ./luban
 ./luban
 
 # 启动前端
-cd luban/luban_fe
+cd luban/front
 npm run dev
 ```
 
